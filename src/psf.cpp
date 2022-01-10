@@ -16,7 +16,7 @@ namespace psf {
     inline uint32_t read_section_preamble(std::ifstream & data, uint32_t section_code);
     inline void check_section_end(std::ifstream & data, uint32_t end_pos);
     inline void read_index(std::ifstream & data, bool is_trace);
-    void write_properties(const PropDict & prop_dict, H5::H5Location * dset);
+    void write_properties(const PropDict & prop_dict, H5::H5Object * dset);
 
     void read_psf(const std::string& psf_filename, const std::string& hdf5_filename, bool print_msg) {
         read_psf(psf_filename, hdf5_filename, "", print_msg);
@@ -619,7 +619,7 @@ namespace psf {
 
     }
 
-    void write_properties(const PropDict & prop_dict, H5::H5Location * dset) {
+    void write_properties(const PropDict & prop_dict, H5::H5Object * dset) {
         // write properties as attributes to dataset.
         for (auto entry : prop_dict) {
             H5::DataSpace attr_space = H5::DataSpace(H5S_SCALAR);
